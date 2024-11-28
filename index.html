@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rearranged Alternating Harmonic Series</title>
-    <style>
+  <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rearranged Alternating Harmonic Series</title>
+  <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -12,16 +13,18 @@
         #result {
             margin-top: 20px;
         }
-    </style>
+        #chartContainer {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+  </style>
 </head>
 <body>
-    <h1>Rearranged Alternating Harmonic Series Convergence</h1>
-    <label for="targetNumber">Enter a number:</label>
-    <input type="number" id="targetNumber" step="0.01">
-    <button onclick="generateSeries()">Generate Series</button>
-    <div id="result"></div>
-
-    <script src="script.js"></script>
+  <h1>Rearranged Alternating Harmonic Series Convergence</h1><label for="targetNumber">Enter a number:</label> <input type="number" id="targetNumber" step="0.01"> <label for="numTerms">Number of terms:</label> <input type="number" id="numTerms" value="20" min="1"> <button onclick="generateSeries()">Generate Series</button>
+  <div id="result"></div>
+  <canvas id="seriesChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+  <script src="script.js"></script>
 </body>
 </html>
-
