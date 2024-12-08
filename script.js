@@ -40,9 +40,11 @@ function generateSeries() {
   }
 
   resultDiv.innerHTML = `<p>The first ${numTerms} terms of the rearranged ${getSequenceName(sequenceType)} series that converges to ${targetNumber} are:</p>`;
-  resultDiv.innerHTML += `<p>${series.join(", ")}</p>`;
+  resultDiv.innerHTML += `<button class="reveal-button" onclick="toggleSeries()" id="seriesButton">Reveal Terms</button>`;
+  resultDiv.innerHTML += `<p id="seriesResult" style="display:none;">${series.join(", ")}</p>`;
   resultDiv.innerHTML += `<p>The corresponding first ${numTerms} partial sums of the rearranged ${getSequenceName(sequenceType)} series that converges to ${targetNumber} are:</p>`;
-  resultDiv.innerHTML += `<p>${partialSums.join(", ")}</p>`;
+  resultDiv.innerHTML += `<button class="reveal-button" onclick="togglePartialSums()" id="partialSumsButton">Reveal Partial Sums</button>`;
+  resultDiv.innerHTML += `<p id="partialSumsResult" style="display:none;">${partialSums.join(", ")}</p>`;
 
   // Destroy the existing chart if it exists
   if (seriesChart) {
@@ -90,6 +92,30 @@ function generateSeries() {
       },
     },
   });
+}
+
+function toggleSeries() {
+  const seriesResult = document.getElementById("seriesResult");
+  const seriesButton = document.getElementById("seriesButton");
+  if (seriesResult.style.display === "none") {
+    seriesResult.style.display = "block";
+    seriesButton.textContent = "Hide Terms";
+  } else {
+    seriesResult.style.display = "none";
+    seriesButton.textContent = "Reveal Terms";
+  }
+}
+
+function togglePartialSums() {
+  const partialSumsResult = document.getElementById("partialSumsResult");
+  const partialSumsButton = document.getElementById("partialSumsButton");
+  if (partialSumsResult.style.display === "none") {
+    partialSumsResult.style.display = "block";
+    partialSumsButton.textContent = "Hide Partial Sums";
+  } else {
+    partialSumsResult.style.display = "none";
+    partialSumsButton.textContent = "Reveal Partial Sums";
+  }
 }
 
 function getSequence(sequenceType) {

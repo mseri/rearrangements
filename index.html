@@ -49,6 +49,17 @@
         .form-group .reset-button:hover {
             background-color: #e53935;
         }
+        .reveal-button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .reveal-button:hover {
+            background-color: #1976D2;
+        }
   </style>
 </head>
 <body>
@@ -87,9 +98,9 @@
   <script>
 
         function resetForm() {
-            document.getElementById('targetNumber').value = '0.378';
-            document.getElementById('numTerms').value = '20';
-            document.getElementById('sequenceType').value = 'harmonic';
+            // document.getElementById('targetNumber').value = '0.378';
+            // document.getElementById('numTerms').value = '20';
+            // document.getElementById('sequenceType').value = 'harmonic';
             document.getElementById('result').innerHTML = '';
             if (seriesChart) {
                 seriesChart.destroy();
