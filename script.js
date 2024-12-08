@@ -143,6 +143,8 @@ function getSequence(sequenceType) {
   }
 }
 
+// Get the first term of the sequence that satisfies the condition
+// cmp(sequence(term))
 function getSuitableTerm(sequence, term, cmp) {
   while (!cmp(sequence(term))) {
     term++;
