@@ -14,25 +14,32 @@ function generateSeries() {
   }
 
   let series = [];
+  let partialSums = [];
   let currentSum = 0;
   let positiveTerm = 1;
   let negativeTerm = 2;
+  let term = 0;
   let termsCount = 0;
 
   while (termsCount < numTerms) {
     if (currentSum < targetNumber) {
-      currentSum += 1 / positiveTerm;
+      term = positiveTerm;
+      currentSum += 1 / term;
       positiveTerm += 2;
     } else {
-      currentSum -= 1 / negativeTerm;
+      term = negativeTerm;
+      currentSum -= 1 / term;
       negativeTerm += 2;
     }
-    series.push(currentSum);
+    partialSums.push(currentSum);
+    series.push(1 / term);
     termsCount++;
   }
 
-  resultDiv.innerHTML = `<p>The first ${numTerms} partial sums of the rearranged alternating harmonic series that converges to ${targetNumber} are:</p>`;
+  resultDiv.innerHTML = `<p>The first ${numTerms} of the rearranged alternating harmonic series that converges to ${targetNumber} are:</p>`;
   resultDiv.innerHTML += `<p>${series.join(", ")}</p>`;
+  resultDiv.innerHTML += `<p>The corresponding first ${numTerms} partial sums of the rearranged alternating harmonic series that converges to ${targetNumber} are:</p>`;
+  resultDiv.innerHTML += `<p>${partialSums.join(", ")}</p>`;
 
   // Destroy the existing chart if it exists
   if (seriesChart) {
@@ -44,11 +51,11 @@ function generateSeries() {
   seriesChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: series.map((_, index) => index + 1),
+      labels: partialSums.map((_, index) => index + 1),
       datasets: [
         {
           label: "Partial Sums",
-          data: series,
+          data: partialSums,
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 2,
           fill: false,
