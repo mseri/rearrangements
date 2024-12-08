@@ -17,8 +17,8 @@ function generateSeries() {
   let series = [];
   let partialSums = [];
   let currentSum = 0;
-  let positiveTerm = 1;
-  let negativeTerm = 2;
+  let positiveTerm = 0;
+  let negativeTerm = 0;
   let term = 0;
   let termsCount = 0;
 
@@ -26,13 +26,21 @@ function generateSeries() {
 
   while (termsCount < numTerms) {
     if (currentSum < targetNumber) {
+      positiveTerm = getSuitableTerm(
+        sequence,
+        positiveTerm + 1,
+        (term) => term >= 0,
+      );
       term = sequence(positiveTerm);
       currentSum += term;
-      positiveTerm += 2;
     } else {
+      negativeTerm = getSuitableTerm(
+        sequence,
+        negativeTerm + 1,
+        (term) => term <= 0,
+      );
       term = sequence(negativeTerm);
       currentSum += term;
-      negativeTerm += 2;
     }
     partialSums.push(currentSum);
     series.push(term);
@@ -126,9 +134,20 @@ function getSequence(sequenceType) {
       return (k) => ((-1) ** (k + 1) * Math.log(k)) / k;
     case "sqrt":
       return (k) => (-1) ** (k + 1) / Math.sqrt(k);
+    case "sin":
+      return (k) => Math.sin(k) / k;
+    case "alt_sin":
+      return (k) => ((-1) ** (k + 1) * Math.sin(k)) / k;
     default:
       return (k) => (-1) ** (k + 1) / k;
   }
+}
+
+function getSuitableTerm(sequence, term, cmp) {
+  while (!cmp(sequence(term))) {
+    term++;
+  }
+  return term;
 }
 
 function getSequenceName(sequenceType) {
@@ -139,6 +158,10 @@ function getSequenceName(sequenceType) {
       return "alternating logarithmic";
     case "sqrt":
       return "alternating square root";
+    case "sin":
+      return "sin(n)/n";
+    case "alt_sin":
+      return "alternating sin(n)/n";
     default:
       return "alternating harmonic";
   }
